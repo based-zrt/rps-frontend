@@ -6,7 +6,6 @@ specifiers:
   '@sveltejs/adapter-cloudflare': ^2.3.3
   '@sveltejs/kit': ^1.20.4
   '@types/animejs': ^3.1.7
-  animejs: ^3.2.1
   bootstrap: ^5.3.2
   prettier: ^2.8.0
   prettier-plugin-svelte: ^2.10.1
@@ -17,16 +16,13 @@ specifiers:
   typescript: ^5.0.0
   vite: ^4.4.2
 
-dependencies:
-  '@popperjs/core': 2.11.8
-  animejs: 3.2.1
-  bootstrap: 5.3.2_@popperjs+core@2.11.8
-
 devDependencies:
   '@playwright/test': 1.38.0
+  '@popperjs/core': 2.11.8
   '@sveltejs/adapter-cloudflare': 2.3.3_@sveltejs+kit@1.25.0
   '@sveltejs/kit': 1.25.0_svelte@4.2.1+vite@4.4.9
   '@types/animejs': 3.1.7
+  bootstrap: 5.3.2_@popperjs+core@2.11.8
   prettier: 2.8.8
   prettier-plugin-svelte: 2.10.1_hfafeyo6vw33o2ufgpsfnrywzu
   sass: 1.68.0
@@ -313,7 +309,7 @@ packages:
 
   /@popperjs/core/2.11.8:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
-    dev: false
+    dev: true
 
   /@sveltejs/adapter-cloudflare/2.3.3_@sveltejs+kit@1.25.0:
     resolution: {integrity: sha512-bbcm6kq4dEluFtFJZed3KSRG4f5GUElYkVfOmnPruTqZ29nTElPJTomAu5QCp7GLkwA26O3h1Dk7+d9yLTQEXg==}
@@ -412,10 +408,6 @@ packages:
     hasBin: true
     dev: true
 
-  /animejs/3.2.1:
-    resolution: {integrity: sha512-sWno3ugFryK5nhiDm/2BKeFCpZv7vzerWUcUPyAZLDhMek3+S/p418ldZJbJXo5ZUOpfm2kP2XRO4NJcULMy9A==}
-    dev: false
-
   /anymatch/3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
@@ -451,7 +443,7 @@ packages:
       '@popperjs/core': ^2.11.8
     dependencies:
       '@popperjs/core': 2.11.8
-    dev: false
+    dev: true
 
   /brace-expansion/1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
