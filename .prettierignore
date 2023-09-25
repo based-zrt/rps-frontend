@@ -11,3 +11,10 @@ node_modules
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# Ignore config files
+.prettierrc
+playwright.config.ts
+svelte.config.js
+tsconfig.json
+vite.config.ts
