@@ -18,3 +18,5 @@ playwright.config.ts
 svelte.config.js
 tsconfig.json
 vite.config.ts
+postcss.config.js
+tailwind.config.ts
