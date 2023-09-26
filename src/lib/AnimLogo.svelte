@@ -5,10 +5,13 @@
 	import { onMount } from 'svelte'
 
 	let phase: number = 0
+	let phases = [rock, paper, scissors]
+	let src = rock
 
 	onMount(() => {
 		const intervalId = setInterval(() => {
 			if (++phase == 3) phase = 0
+			src = phases[phase]
 		}, 1500)
 
 		return () => {
@@ -17,12 +20,4 @@
 	})
 </script>
 
-{#if phase == 0}
-	<img src={rock} alt="Rock" srcset="" />
-{/if}
-{#if phase == 1}
-	<img src={paper} alt="Rock" srcset="" />
-{/if}
-{#if phase == 2}
-	<img src={scissors} alt="Rock" srcset="" />
-{/if}
+<img {src} alt={src} />
