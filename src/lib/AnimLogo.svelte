@@ -12,7 +12,7 @@
 		const intervalId = setInterval(() => {
 			if (++phase == 3) phase = 0
 			src = phases[phase]
-		}, 1500)
+		}, 2000)
 
 		return () => {
 			clearInterval(intervalId)
