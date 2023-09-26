@@ -1,7 +1,11 @@
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<script lang="ts">
+	import Background from '$lib/Background.svelte'
+	import AnimLogo from '$lib/AnimLogo.svelte'
+</script>
 
-<style lang="postcss">
-	:global(html) {
-		background-color: theme(colors.gray.100);
-	}
-</style>
+<Background>
+	<div class="container flex flex-col h-full justify-center items-center">
+		<AnimLogo />
+		<h1 class="uppercase font-bold text-3xl m-7">rock paper scissors</h1>
+	</div>
+</Background>
