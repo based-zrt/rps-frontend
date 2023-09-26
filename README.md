@@ -3,6 +3,7 @@
 Overenginnered rock paper scissors site.
 
 ## Developing
+
 This project is built with [pnpm](https://pnpm.io/).  
 We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit formatting, please review it briefly before committing.
 
@@ -26,6 +27,7 @@ pnpm run build
 You can preview the production build with `pnpm run preview`.
 
 # License
+
 ```
 
     rps-frontend - Rock Paper Scissors
