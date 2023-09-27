@@ -1,7 +1,7 @@
 <script lang="ts">
-	import rock from '$lib/assets/icons/rock.png'
-	import paper from '$lib/assets/icons/paper.png'
-	import scissors from '$lib/assets/icons/scissors.png'
+	import rock from '$lib/assets/icons/rock_centered.png'
+	import paper from '$lib/assets/icons/paper_centered.png'
+	import scissors from '$lib/assets/icons/scissors_centered.png'
 	import { onMount } from 'svelte'
 
 	let phase: number = 0
@@ -12,7 +12,7 @@
 		const intervalId = setInterval(() => {
 			if (++phase == 3) phase = 0
 			src = phases[phase]
-		}, 2000)
+		}, 500)
 
 		return () => {
 			clearInterval(intervalId)
@@ -20,4 +20,4 @@
 	})
 </script>
 
-<img {src} alt={src} />
+<img class="h-80" {src} alt={src} />

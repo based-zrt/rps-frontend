@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import * as THREE from 'three'
 	import WAVES from 'vanta/dist/vanta.waves.min'
 
@@ -6,7 +6,7 @@
 		const anim = WAVES({
 			el: node,
 			THREE: THREE,
-			mouseControls: false,
+			mouseControls: true,
 			touchControls: false,
 			gyroControls: true,
 			minHeight: 200.0,
