@@ -20,4 +20,4 @@
 	})
 </script>
 
-<img class="h-80" {src} alt={src} />
+<img class="transition ease-in-out hover:scale-110 duration-200 h-40 lg:h-80" {src} alt={src} />
