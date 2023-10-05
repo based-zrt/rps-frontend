@@ -16,7 +16,6 @@
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-cloudflare": "^2.3.3",
 		"@sveltejs/kit": "^1.20.4",
-		"@types/three": "^0.156.0",
 		"autoprefixer": "^10.4.16",
 		"bits-ui": "^0.5.7",
 		"clsx": "^2.0.0",
@@ -28,10 +27,8 @@
 		"tailwind-merge": "^1.14.0",
 		"tailwind-variants": "^0.1.14",
 		"tailwindcss": "^3.3.3",
-		"three": "0.140.2",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"vanta": "^0.5.24",
 		"vite": "^4.4.2"
 	},
 	"type": "module"
