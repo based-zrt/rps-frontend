@@ -1,3 +1,26 @@
+enum Result {
+    Won = 0,
+    Lost,
+    Tie
+}
+
+export enum Take {
+    Rock = 0,
+    Paper,
+    Scissors
+}
+
+interface GameReqest {
+    take: Take
+}
+
+interface GameResponse {
+    robotTake: Take,
+    robotResult: Result,
+    userTake: Take,
+    userResult: Result
+}
+
 enum AnimState {
     PlayerFadeOut = 1,
     PlayerMoveIn,
@@ -35,7 +58,6 @@ export class Game {
     }
 
     public roll(time: number) {
-        console.log('roll invoked')
         const intervalID = setInterval(() => {
             let tmp = []
             this.rolledIndex = ++this.rolledIndex % this.rollElements.length
@@ -46,5 +68,35 @@ export class Game {
             this.listCallback(tmp)
         }, 100)
         setTimeout(() => clearInterval(intervalID), time)
+    }
+
+    public async playerTake(take: Take): Promise<undefined> {
+        this.roll(1500)
+        const start = Date.now()
+        const response: GameResponse = await this.fetchResult(take)
+        console.log(response)
+        const elapsed = Date.now() - start
+        setTimeout(() => {
+            let tmp = []
+            for (let i = 0; i < 3; i++) {
+                if (i === response.robotTake) tmp.push(this.enabledElement)
+                else tmp.push(this.disabledElement)
+            }
+            this.listCallback(tmp)
+        }, 1501 - elapsed)
+    }
+
+    async fetchResult(t: Take): Promise<GameResponse> {
+        const response = await fetch("https://api.sunstorm.rocks/rps/take", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                take: t
+            })
+        })
+        const res = await response.json()
+        return res
     }
 }
