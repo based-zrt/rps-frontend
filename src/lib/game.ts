@@ -10,15 +10,18 @@ export enum Take {
     Scissors
 }
 
-interface GameReqest {
-    take: Take
-}
-
 interface GameResponse {
     robotTake: Take,
     robotResult: Result,
     userTake: Take,
     userResult: Result
+}
+
+export interface ChoiceProps {
+    src: string,
+    robot: boolean,
+    enabled: boolean,
+    selected: boolean
 }
 
 enum AnimState {
@@ -43,29 +46,34 @@ function delay(time: number) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-export class Game {
-    private rollElements: Array<string>
-    private rolledIndex: number = 0
-    private listCallback: (l: Array<string>) => void
-    private enabledElement: string
-    private disabledElement: string
+function selectTake(arr: Array<ChoiceProps>, t: Take) {
+    arr.forEach(c => {
+        c.enabled = false
+        c.selected = false
+    })
+    arr[t].enabled = true
+    arr[t].selected = true
+}
 
-    constructor(rollElements: Array<string>, listCallback: (l: Array<string>) => void, enabledElement: string, disabledElement: string) {
-        this.rollElements = rollElements
-        this.listCallback = listCallback
-        this.enabledElement = enabledElement
-        this.disabledElement = disabledElement
+export class Game {
+    private robotProps: Array<ChoiceProps>
+    private playerProps: Array<ChoiceProps>
+    private rolledIndex: number = 0
+    private robotCallback: (l: Array<ChoiceProps>) => void
+    private playerCallback: (l: Array<ChoiceProps>) => void
+
+    constructor(robotProps: Array<ChoiceProps>, robotCallback: (l: Array<ChoiceProps>) => void, playerProps: Array<ChoiceProps>, playerCallback: (l: Array<ChoiceProps>) => void) {
+        this.robotProps = robotProps
+        this.robotCallback = robotCallback
+        this.playerProps = playerProps
+        this.playerCallback = playerCallback
     }
 
     public roll(time: number) {
         const intervalID = setInterval(() => {
-            let tmp = []
-            this.rolledIndex = ++this.rolledIndex % this.rollElements.length
-            for (let i = 0; i < this.rollElements.length; i++) {
-                if (this.rolledIndex == i) tmp.push(this.enabledElement)
-                else tmp.push(this.disabledElement)
-            }
-            this.listCallback(tmp)
+            const tmp = this.robotProps
+            selectTake(tmp, ++this.rolledIndex % this.robotProps.length)
+            this.robotCallback(tmp)
         }, 100)
         setTimeout(() => clearInterval(intervalID), time)
     }
@@ -77,12 +85,9 @@ export class Game {
         console.log(response)
         const elapsed = Date.now() - start
         setTimeout(() => {
-            let tmp = []
-            for (let i = 0; i < 3; i++) {
-                if (i === response.robotTake) tmp.push(this.enabledElement)
-                else tmp.push(this.disabledElement)
-            }
-            this.listCallback(tmp)
+            let tmp = this.robotProps
+            selectTake(tmp, response.robotTake)
+            this.robotCallback(tmp)
         }, 1501 - elapsed)
     }
 

@@ -6,28 +6,39 @@
 	import paper from '$lib/assets/icons/paper_centered.png'
 	import scissors from '$lib/assets/icons/scissors_centered.png'
 
-	import { Game, Take } from '$lib/game'
+	import { Game, Take, type ChoiceProps } from '$lib/game'
 
-	const disabled = 'saturate-0 pointer-events-none'
-	const enabled = 'hue-rotate-90 saturate-200 scale-110 pointer-events-none'
+	let robotProps: ChoiceProps[] = [
+		{ src: rock, robot: true, enabled: false, selected: false },
+		{ src: paper, robot: true, enabled: false, selected: false },
+		{ src: scissors, robot: true, enabled: false, selected: false }
+	]
+	let playerProps: ChoiceProps[] = [
+		{ src: rock, robot: false, enabled: true, selected: false },
+		{ src: paper, robot: false, enabled: true, selected: false },
+		{ src: scissors, robot: false, enabled: true, selected: false }
+	]
 
-	let styles = [disabled, disabled, disabled]
-
-	const game = new Game(styles, (l) => (styles = l), enabled, disabled)
+	const game = new Game(
+		robotProps,
+		(l) => (robotProps = l),
+		playerProps,
+		(l) => (playerProps = l)
+	)
 </script>
 
 <Centered>
 	<div>
 		<h1 class="text-2xl uppercase tracking-widest">robot</h1>
 		<div class="container flex flex-row justify-center text-center pb-10">
-			<Choice src={rock} extraStyles={styles[0]} />
-			<Choice src={paper} extraStyles={styles[1]} />
-			<Choice src={scissors} extraStyles={styles[2]} />
+			<Choice {...robotProps[0]} />
+			<Choice {...robotProps[1]} />
+			<Choice {...robotProps[2]} />
 		</div>
 		<div class="container flex flex-row justify-center text-center mt-10">
-			<Choice src={rock} on:click={() => game.playerTake(Take.Rock)} />
-			<Choice src={paper} on:click={() => game.playerTake(Take.Paper)} />
-			<Choice src={scissors} on:click={() => game.playerTake(Take.Scissors)} />
+			<Choice {...playerProps[0]} on:click={() => game.playerTake(Take.Rock)} />
+			<Choice {...playerProps[1]} on:click={() => game.playerTake(Take.Paper)} />
+			<Choice {...playerProps[2]} on:click={() => game.playerTake(Take.Scissors)} />
 		</div>
 		<h1 class="text-2xl uppercase tracking-widest">player</h1>
 	</div>
