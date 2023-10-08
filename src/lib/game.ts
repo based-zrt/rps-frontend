@@ -46,52 +46,49 @@ function delay(time: number) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
-function selectTake(arr: Array<ChoiceProps>, t: Take) {
-    arr.forEach(c => {
-        c.enabled = false
-        c.selected = false
-    })
-    arr[t].enabled = true
-    arr[t].selected = true
-}
-
 export class Game {
     private robotProps: Array<ChoiceProps>
+    private robotDefault: Array<ChoiceProps>
     private playerProps: Array<ChoiceProps>
+    private playerDefault: Array<ChoiceProps>
     private rolledIndex: number = 0
     private robotCallback: (l: Array<ChoiceProps>) => void
     private playerCallback: (l: Array<ChoiceProps>) => void
 
     constructor(robotProps: Array<ChoiceProps>, robotCallback: (l: Array<ChoiceProps>) => void, playerProps: Array<ChoiceProps>, playerCallback: (l: Array<ChoiceProps>) => void) {
         this.robotProps = robotProps
+        this.robotDefault = structuredClone(robotProps)
         this.robotCallback = robotCallback
         this.playerProps = playerProps
+        this.playerDefault = structuredClone(playerProps)
         this.playerCallback = playerCallback
     }
 
     public roll(time: number) {
         const intervalID = setInterval(() => {
-            const tmp = this.robotProps
-            selectTake(tmp, ++this.rolledIndex % this.robotProps.length)
-            this.robotCallback(tmp)
+            this.selectTake(++this.rolledIndex % this.robotProps.length, false)
+            this.robotCallback(this.robotProps)
         }, 100)
         setTimeout(() => clearInterval(intervalID), time)
     }
 
     public async playerTake(take: Take): Promise<undefined> {
+        this.selectTake(take)
+        this.playerCallback(this.playerProps)
         this.roll(1500)
         const start = Date.now()
         const response: GameResponse = await this.fetchResult(take)
-        console.log(response)
         const elapsed = Date.now() - start
         setTimeout(() => {
-            let tmp = this.robotProps
-            selectTake(tmp, response.robotTake)
-            this.robotCallback(tmp)
+            this.selectTake(response.robotTake, false)
+            this.robotCallback(this.robotProps)
         }, 1501 - elapsed)
+        await delay(4000)
+        this.robotCallback(this.robotDefault)
+        this.playerCallback(this.playerDefault)
     }
 
-    async fetchResult(t: Take): Promise<GameResponse> {
+    private async fetchResult(t: Take): Promise<GameResponse> {
         const response = await fetch("https://api.sunstorm.rocks/rps/take", {
             method: "POST",
             headers: {
@@ -103,5 +100,21 @@ export class Game {
         })
         const res = await response.json()
         return res
+    }
+
+    private selectTake(t: Take, player: boolean = true): undefined {
+        const arr = player ? this.playerProps : this.robotProps
+
+        arr.forEach(c => {
+            c.enabled = false
+            c.selected = false
+        })
+        arr[t].enabled = true
+        arr[t].selected = true
+
+        if (player)
+            this.playerCallback(arr)
+        else
+            this.robotCallback(arr)
     }
 }
