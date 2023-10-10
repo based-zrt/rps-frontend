@@ -1,4 +1,4 @@
-import { resultDisplay } from "./stores";
+import { resultDisplay, robotScore, playerScore } from "./stores";
 
 export enum Result {
     Won = 0,
@@ -85,6 +85,10 @@ export class Game {
         const response: GameResponse = await this.fetchResult(take)
         const elapsed = Date.now() - start
         this.resultCallback(response)
+        if (response.robotResult == Result.Won || response.robotResult == Result.Tie)
+            robotScore.update(n => n + 1)
+        if (response.userResult == Result.Won || response.userResult == Result.Tie)
+            playerScore.update(n => n + 1)
         await delay(1501 - elapsed)
         this.selectTake(response.robotTake, false)
         this.robotCallback(this.robotProps)

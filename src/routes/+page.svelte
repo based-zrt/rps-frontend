@@ -1,6 +1,11 @@
 <script lang="ts">
 	import Centered from '$lib/Centered.svelte'
 	import AnimLogo from '$lib/AnimLogo.svelte'
+
+	import { onMount } from 'svelte'
+	import { registerScoreboard } from '$lib/scoreboard'
+
+	onMount(() => registerScoreboard())
 </script>
 
 <Centered>
