@@ -1,7 +1,10 @@
 {
 	"name": "rps-frontend",
+	"description": "Rock paper scissors website",
 	"version": "0.0.1",
 	"private": true,
+	"homepage": "https://github.com/based-zrt/rps-frontend#readme",
+	"license": "AGPL-3.0-only",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
