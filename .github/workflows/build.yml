@@ -1,0 +1,31 @@
+name: CI Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request: 
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node_version: [18, 20]
+
+    steps:
+     - uses: actions/checkout@v4
+     - name: Setup pnpm
+       uses: pnpm/action-setup@v2
+       with:
+         version: 8
+     - name: Setup Node ${{ matrix.node_version }}
+       uses: actions/setup-node@v3
+       with:
+         node-version: ${{ matrix.node_version }}
+         cache: pnpm
+     - name: Install dependencies
+       run: pnpm install
+     - name: Run checks
+       run: pnpm check
