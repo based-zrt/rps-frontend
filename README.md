@@ -1,6 +1,16 @@
-# rps-frontend
+# <img src="https://rps.sunstorm.rocks/favicon.png" height="25" />  rps-frontend [![ci badge](https://github.com/based-zrt/rps-frontend/actions/workflows/build.yml/badge.svg)](https://github.com/based-zrt/rps-frontend/actions/workflows/build.yml)
 
 Overenginnered rock paper scissors site.
+
+## Tech rundown
+ - Scripting: <img src="https://www.typescriptlang.org/favicon-32x32.png" height="15" /> [TypeScript](https://typescriptlang.org/)
+ - Component library: <img src="https://svelte.dev/favicon.png" height="17" /> [Svelte](https://svelte.dev/)
+ - Meta framework: <img src="https://svelte.dev/favicon.png" height="17" /> [SvelteKit](https://kit.svelte.dev/)
+ - CSS: <img src="https://tailwindcss.com/favicons/favicon-32x32.png" height="17" /> [Tailwind](https://tailwindcss.com/)
+ - CSS components: [shadcn](https://www.shadcn-svelte.com/)
+ - Deployment, hosting: <img src="https://pages.cloudflare.com/favicon.ico" height="15" /> [Cloudflare Pages](https://pages.cloudflare.com/)
+ - Testing: <img src="https://playwright.dev/img/playwright-logo.svg" height="15" /> [Playwright](https://playwright.dev/)
+ - CI: [Github Actions](https://github.com/features/actions)
 
 ## Developing
 
