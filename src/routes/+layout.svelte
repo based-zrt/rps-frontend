@@ -3,6 +3,10 @@
 	import '$lib/app.css'
 </script>
 
+<svelte:head>
+	<title>Rock Paper Scissors</title>
+</svelte:head>
+
 <Background>
 	<slot />
 </Background>
