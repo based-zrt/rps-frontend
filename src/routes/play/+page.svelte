@@ -1,12 +1,14 @@
 <script lang="ts">
 	import Centered from '$lib/Centered.svelte'
 	import Choice from '$lib/Choice.svelte'
+	import ResultDisplay from '$lib/ResultDisplay.svelte'
 
 	import rock from '$lib/assets/icons/rock_centered.png'
 	import paper from '$lib/assets/icons/paper_centered.png'
 	import scissors from '$lib/assets/icons/scissors_centered.png'
 
-	import { Game, Take, type ChoiceProps } from '$lib/game'
+	import { Game, Take, type ChoiceProps, type GameResponse } from '$lib/game'
+	import { resultDisplay } from '$lib/stores'
 
 	let robotProps: ChoiceProps[] = [
 		{ src: rock, robot: true, enabled: false, selected: false },
@@ -19,14 +21,22 @@
 		{ src: scissors, robot: false, enabled: true, selected: false }
 	]
 
+	let gameResult: GameResponse = { robotTake: 0, robotResult: 0, userTake: 0, userResult: 0 }
+
 	const game = new Game(
 		robotProps,
 		(l) => (robotProps = l),
 		playerProps,
-		(l) => (playerProps = l)
+		(l) => (playerProps = l),
+		(r) => (gameResult = r)
 	)
 </script>
 
+<ResultDisplay
+	robotResult={gameResult.robotResult}
+	playerResult={gameResult.userResult}
+	bind:open={$resultDisplay}
+/>
 <Centered>
 	<div>
 		<h1 class="text-2xl uppercase tracking-widest">robot</h1>
