@@ -92,7 +92,7 @@ export class Game {
         await delay(1501 - elapsed)
         this.selectTake(response.robotTake, false)
         this.robotCallback(this.robotProps)
-        await delay(2500)
+        await delay(1500)
         resultDisplay.set(true)
         await delay(1000)
         this.robotCallback(this.robotDefault)
