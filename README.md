@@ -41,7 +41,7 @@ You can preview the production build with `pnpm run preview`.
 ```
 
     rps-frontend - Rock Paper Scissors
-    Copyright (C) 2024  SunStorm
+    Copyright (C) 2025  SunStorm
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published
